@@ -20,4 +20,4 @@ signContent=`echo -n $signStr | openssl dgst -hmac $secretKey -sha1 -binary | ba
 ## request
 TEXT=$(curl -s -H "Spas-AccessKey:"$accessKey -H "timeStamp:"$timestamp -H "Spas-Signature:"$signContent "http://"$serverIp":8080/diamond-server/config.co?dataId="$dataId"&group="$group"&tenant="$namespace)
 echo $TEXT > /etc/nginx/conf.d/default.conf
-exec nginx
+exec nginx -g 'daemon off;'
