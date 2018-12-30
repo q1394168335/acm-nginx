@@ -13,7 +13,7 @@ group=$GROUP
 serverIp=`curl $endpoint:8080/diamond-server/diamond -s | awk '{a[NR]=$0}END{srand();i=int(rand()*NR+1);print a[i]}'`
 
 ## config sign
-timestamp=`echo $[$(date +%s%N)/1000000]`
+timestamp=`(date +%s%N)/1000000`
 signStr=$namespace+$group+$timestamp
 signContent=`echo -n $signStr | openssl dgst -hmac $secretKey -sha1 -binary | base64`
 
